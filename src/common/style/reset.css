@@ -1,0 +1,17 @@
+body,html,h1,h2,h3,h4,h5,h6,div,ul,li,ol,dl,form,p,span,i,a{
+    padding:0;
+    margin:0;
+}
+h1,h2,h3,h4,h5,h6,div,ul,li,ol,dl,form,p,span,i{
+    /* text-align: center; */
+}
+body,html{
+    width:100%;
+    height:100%
+}
+span,a{
+    display: inline-block;
+}
+ul,li,ol{
+    list-style: none;
+}
