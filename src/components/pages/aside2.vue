@@ -1,6 +1,6 @@
 <template>
     <div class = "main_aside">
-        <el-tabs :tab-position="tabPosition" style="height: 200px;">
+        <el-tabs :tab-position="tabPosition" style="height: 100%;" class = "tac">
             <el-tab-pane label="用户管理">用户管理</el-tab-pane>
             <el-tab-pane label="配置管理">配置管理</el-tab-pane>
             <el-tab-pane label="角色管理">角色管理shenmde</el-tab-pane>
@@ -10,10 +10,7 @@
         <div class = "main_aside_right">
             <h5>右边的</h5>
             <div class = "main_aside_right_top">
-                <!-- <div class = "main_aside_right_top_img">
-                    <b>Timepoints:</b>
-                    <img src = "" >
-                </div> -->
+        
                 <ul>
                     <li>
                         <div class = "main_aside_right_top_img">
@@ -86,6 +83,7 @@ export default {
         display: flex;
         width:100%;
         text-align: left;
+        /* padding:30px 0 30px; */
     }
     .tac{
         width:30%;

@@ -4,7 +4,10 @@
     <div id = "e-main">
       <div id="nav">
         <router-link to="/">96控板</router-link>
-        <router-link to="/about">About</router-link>
+        <router-link to="/scan">Scan</router-link>
+        <router-link to="/batches">Batches</router-link>
+        <router-link to="/batchsum">Batchsum</router-link>
+        <router-link to="/reports">reports</router-link>
       </div>
       <router-view />
       <!-- <Home/> -->

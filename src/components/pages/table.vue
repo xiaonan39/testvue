@@ -19,6 +19,9 @@
 
 <script>
     export default{
+        props:{
+            data:String,
+        },
         data(){
             return{
                 trlist:[1,2,3,4,5,6,7,8,9,10,11,12],
@@ -26,13 +29,11 @@
             }
         },
         method:{
-            trloop(){
-                var tr = trlist;
-                console.log(tr)
-            }
         },
         mounted(){
-            this.trloop()
+            Name:{
+                this.$emit(this.data)
+            }
         }
     }
 </script>
@@ -42,7 +43,7 @@
 
    }
    table tr th,table tr td{
-       width:9%;
+       width:8%;
        text-align: center;
    }
    table tr td{

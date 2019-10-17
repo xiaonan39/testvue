@@ -83,7 +83,7 @@
                 </div>
             </div>
             <div class = "main_aside_right_bottom">
-                <Etable/>
+                <Etable :data="name" @Name="getName"/>
             </div>
         </div>
                 
@@ -107,27 +107,47 @@ export default {
           name: 'shengtong',
           address: 'Coming Costar96'
         }, {
-          date: '2019-10-17',
+          date: '2019-10-18',
           name: 'shengtong',
           address: 'Coming Costar96'
         }, {
-          date: '2019-10-17',
+          date: '2019-10-197',
           name: 'shengtong',
           address: 'Coming Costar96'
         }, {
-          date: '2019-10-17',
+          date: '2019-10-117',
           name: 'shengtong',
           address: 'Coming Costar96'
         }],
         currentRow: null
       }
     },
+    mounted() {
+        
+    },
+    watch: {
+        data(){
+          this.getData()  
+        }
+    },
     methods: {
       setCurrent(row) {
         this.$refs.singleTable.setCurrentRow(row);
       },
+      getData(){
+          let api = ''
+          let model ={
+              data: '',
+              name:""
+          }
+      },
       handleCurrentChange(val) {
         this.currentRow = val;
+        console.log(val)
+        this.data = val.data
+      },
+      getName(val){
+
       }
     }
 }
@@ -138,6 +158,8 @@ export default {
         display: flex;
         width:100%;
         text-align: left;
+        height: 100%;
+        padding:30px 0 30px;
     }
     .tac{
         width:30%;
@@ -151,6 +173,8 @@ export default {
         width:30%;
     }
     .main_aside_right{
+        display: flex;
+    flex-direction: column;
         width:100%;
         background: #ccc;
     }
