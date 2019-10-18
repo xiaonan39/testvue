@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <!-- <HelloWorld msg="Welcome to Your Vue.js App" /> -->
-    <Easide/>
+    <!-- <Easide/> -->
   </div>
 </template>
 
@@ -9,14 +9,14 @@
 // @ is an alias to /src
 // import HelloWorld from "@/components/HelloWorld.vue";
 // import Easide from "@/components/pages/aside.vue";
-import Easide from "@/components/pages/aside2.vue";
+// import Easide from "@/components/pages/aside2.vue";
 
 
 
 export default{
     name:"home",
     components:{
-        Easide,
+        // Easide,
     }
 }
 

@@ -19,9 +19,9 @@
     }
     .header_logo{
         background: lightblue;
-        width:100%;
         height:100%;
         font-size: 20px;
+        padding:20px;
     }
     .header_logo p{
         height:100%;

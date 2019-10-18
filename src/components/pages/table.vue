@@ -1,13 +1,13 @@
 <template>
     <!-- <div class = "e-table"> -->
-    <table style="width:100%;height:100%;background: powderblue;">
-        <tr v-for="(tr,index) in trlist" :key="index">{{tr}}
+    <table style="width:100%;background: powderblue;">
+        <tr>
             <th v-for="(th,index) in tdlist" :key="index">{{th}}</th>     
         </tr>
-        <tr>
-            <td>
-                <a href = "">
-                    1
+        <tr v-for="(tr,index) in trlist" :key="index">
+            <td v-for="(th,index) in tdlist" :key="index">
+                <a href = "" v-on:click="godetail">
+                    {{name}}
                     <img src = "">
                 </a>
             </td>
@@ -19,20 +19,22 @@
 
 <script>
     export default{
+        props:{
+            name
+        },
         data(){
             return{
-                trlist:[1,2,3,4,5,6,7,8,9,10,11,12],
-                tdlist:12
+                tdlist:[1,2,3,4,5,6,7,8,9,10,11,12],
+                trlist:[1,2,3,4,5,6,7,8]
             }
         },
-        method:{
-            trloop(){
-                var tr = trlist;
-                console.log(tr)
+        methods:{
+            godetail(){
+                this.$router.push('/home/detail')
             }
         },
         mounted(){
-            this.trloop()
+            
         }
     }
 </script>
@@ -42,7 +44,7 @@
 
    }
    table tr th,table tr td{
-       width:9%;
+       width:8%;
        text-align: center;
    }
    table tr td{

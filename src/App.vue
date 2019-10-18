@@ -3,8 +3,11 @@
     <Eheader/>
     <div id = "e-main">
       <div id="nav">
-        <router-link to="/">96控板</router-link>
-        <router-link to="/about">About</router-link>
+        <router-link to="/home">96孔板</router-link>
+        <router-link to="/scan">Scan</router-link>
+        <router-link to="/batches">Batches</router-link>
+        <router-link to="/batchessum">Batchessum</router-link>
+        <router-link to="/reports">Reports</router-link>
       </div>
       <router-view />
       <!-- <Home/> -->
@@ -14,12 +17,12 @@
 
 <script>
   import Eheader from "@/components/pages/header.vue";
-  import Home from "@/views/Home.vue";
+  // import Home from "@/views/Home.vue";
 
   export default {
     name: "home",
     components: {
-      Eheader,Home
+      Eheader,
     }
   };
 
@@ -47,6 +50,7 @@
 }
 
 #nav a {
+  text-align: left;
   display: block;
   margin-bottom: 1rem;
   font-weight: bold;

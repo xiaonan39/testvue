@@ -27,19 +27,9 @@
                 </el-table-column>
               </el-table>
         </div>
-        
-        <!-- <div style="margin-top: 20px">
-                        <el-button @click="setCurrent(tableData[1])">选中第二行</el-button>
-                        <el-button @click="setCurrent()">取消选择</el-button>
-                    </div> -->
-        
         <div class = "main_aside_right">
             <h5>右边的</h5>
             <div class = "main_aside_right_top">
-                <!-- <div class = "main_aside_right_top_img">
-                    <b>Timepoints:</b>
-                    <img src = "" >
-                </div> -->
                 <ul>
                     <li>
                         <div class = "main_aside_right_top_img">
@@ -83,7 +73,7 @@
                 </div>
             </div>
             <div class = "main_aside_right_bottom">
-                <Etable/>
+                <Etable :name="name"/>
             </div>
         </div>
                 
@@ -104,22 +94,23 @@ export default {
       return {
         tableData: [{
           date: '2019-10-17',
-          name: 'shengtong',
-          address: 'Coming Costar96'
+          name: 'sheng',
+          address: 'Costar96'
         }, {
           date: '2019-10-17',
-          name: 'shengtong',
-          address: 'Coming Costar96'
+          name: 'tong',
+          address: 'Costar96'
         }, {
           date: '2019-10-17',
-          name: 'shengtong',
-          address: 'Coming Costar96'
+          name: 'zhi',
+          address: 'Costar96'
         }, {
           date: '2019-10-17',
-          name: 'shengtong',
-          address: 'Coming Costar96'
+          name: 'neng',
+          address: 'Costar96'
         }],
-        currentRow: null
+        currentRow: null,
+        name:null
       }
     },
     methods: {
@@ -128,6 +119,8 @@ export default {
       },
       handleCurrentChange(val) {
         this.currentRow = val;
+        this.name = val.name;
+        console.log(this.name)
       }
     }
 }
@@ -151,6 +144,7 @@ export default {
         width:30%;
     }
     .main_aside_right{
+        overflow: hidden;
         width:100%;
         background: #ccc;
     }
@@ -159,6 +153,8 @@ export default {
     }
     .main_aside_right_top{
         display:flex;
+        
+
     }
     .main_aside_right_top ul{
         float:left;
