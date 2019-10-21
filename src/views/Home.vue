@@ -6,17 +6,17 @@
 </template>
 
 <script>
-// @ is an alias to /src
-// import HelloWorld from "@/components/HelloWorld.vue";
-// import Easide from "@/components/pages/aside.vue";
+  // @ is an alias to /src
 // import Easide from "@/components/pages/aside2.vue";
+  
+
 
 
 
 export default{
     name:"home",
     components:{
-        // Easide,
+        Eheader,
     }
 }
 

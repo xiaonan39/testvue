@@ -7,6 +7,7 @@
 </template>
 
 <script>
+    
     export default {
         name:"header",
     }
@@ -15,17 +16,17 @@
 <style scoped>
     #e-header {
         width:100%;
-        height:10%;
+        height:40px;
     }
     .header_logo{
         background: lightblue;
         height:100%;
         font-size: 20px;
-        padding:20px;
     }
     .header_logo p{
         height:100%;
         text-align: left;
-        line-height: 2rem;
+        line-height: 40px;
+        padding-left: 15px;
     }
 </style>

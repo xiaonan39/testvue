@@ -4,10 +4,6 @@
     <div id = "e-main">
       <div id="nav">
         <router-link to="/home">96孔板</router-link>
-        <router-link to="/scan">Scan</router-link>
-        <router-link to="/batches">Batches</router-link>
-        <router-link to="/batchessum">Batchessum</router-link>
-        <router-link to="/reports">Reports</router-link>
       </div>
       <router-view />
       <!-- <Home/> -->
@@ -37,6 +33,8 @@
   text-align: center;
   color: #2c3e50;
   height:100%;
+  display: flex;
+  flex-direction: column;
 }
 #e-main{
   display: flex;
@@ -44,7 +42,8 @@
 
 }
 #nav {
-  padding: 30px;
+  width: 4%;
+  padding:10px 30px 0;
   background: #ccc;
   height:100%;
 }

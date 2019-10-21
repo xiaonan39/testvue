@@ -1,34 +1,50 @@
 <template>
     <div class = "main_aside">
-        <div class = "tac">
-                <el-table
+        <div class = "main_aside_left">
+            <table>
+                <tr>
+                    <th>Data</th>
+                    <th>Progect ID</th>
+                    <th>Type</th>
+                </tr>
+                <tr class = "table_session">
+                    <td colspan="3">
+                        <li>2019/10/21
+                            <b>3</b>
+                            <span>session</span>
+                        </li>
+                    </td>
+                </tr>
+                <tr v-for="item in tableData">
+                    <td>{{item.date}}</td>
+                    <td @click="obtain_data(item.project.list)">{{item.project.Id}}</td>
+                    <td>{{item.type}}</td>
+                </tr>
+            </table>
+                <!-- <el-table
                 ref="singleTable"
                 :data="tableData"
                 highlight-current-row
                 @current-change="handleCurrentChange"
                 style="width: 100%">
-                <!-- <el-table-column
-                  type="index"
-                  width="50">
-                </el-table-column> -->
                 <el-table-column
                   property="date"
                   label="date"
-                  width="120">
+                  width="40%">
                 </el-table-column>
                 <el-table-column
                   property="name"
-                  label="mingcheng"
-                  width="120">
+                  label="project ID"
+                  width="30%">
                 </el-table-column>
                 <el-table-column
                   property="address"
                   label="type">
                 </el-table-column>
-              </el-table>
+              </el-table> -->
         </div>
         <div class = "main_aside_right">
-            <h5>右边的</h5>
+            
             <div class = "main_aside_right_top">
                 <ul>
                     <li>
@@ -72,18 +88,19 @@
                     <button> Export clone list…</button>
                 </div>
             </div>
-            <div class = "main_aside_right_bottom">
-                <Etable :name="name"/>
+            <div class = "main_aside_right_table">
+                <Etable :list="list"/>
             </div>
         </div>
-                
+        <router-view></router-view>
+             
                    
     </div>
 </template>
 
 <script>
     import Etable from '@/components/pages/table.vue';
-
+    import Api from '@/common/api/api.js';
 
 export default {
     name:"main_aside",
@@ -94,34 +111,47 @@ export default {
       return {
         tableData: [{
           date: '2019-10-17',
-          name: 'sheng',
-          address: 'Costar96'
+          project:{"Id":"sheng","list":"http://p.qpic.cn/music_cover/2BoMq9QFI0489p1qIiaDYek4UlGibZ8yztm3XH9LapLYHwWldaTOYt1g/600?n=1"
+      /* "https://image.baidu.com/search/detail?ct=503316480&z=0&ipn=false&word=%E7%BB%BF%E8%89%B2%E5%A3%81%E7%BA%B8&hs=2&pn=0&spn=0&di=97130&pi=0&rn=1&tn=baiduimagedetail&is=0%2C0&ie=utf-8&oe=utf-8&cl=2&lm=-1&cs=308272330%2C3429389941&os=450859311%2C3376180624&simid=0%2C0&adpicid=0&lpn=0&ln=30&fr=ala&fm=&sme=&cg=wallpaper&bdtype=0&oriquery=%E7%BB%BF%E8%89%B2%E5%A3%81%E7%BA%B8&objurl=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2F2017-12-14%2F5a31dc87dad0a.jpg&fromurl=ippr_z2C%24qAzdH3FAzdH3Fooo_z%26e3Botg9aaa_z%26e3Bv54AzdH3Fowssrwrj6_1jpwts_89a8ml_d_z%26e3Bip4s&gsm=&islist=&querylist=" */
+    },
+          type: 'Costar96'
         }, {
           date: '2019-10-17',
-          name: 'tong',
-          address: 'Costar96'
+          project: {"Id":"tong",
+            "array":"https://image.baidu.com/search/detail?ct=503316480&z=0&ipn=false&word=%E7%BB%BF%E8%89%B2%E5%A3%81%E7%BA%B8&hs=2&pn=1&spn=0&di=99440&pi=0&rn=1&tn=baiduimagedetail&is=0%2C0&ie=utf-8&oe=utf-8&cl=2&lm=-1&cs=2477295793%2C3932990727&os=2275448177%2C4154071541&simid=4129018881%2C650689467&adpicid=0&lpn=0&ln=30&fr=ala&fm=&sme=&cg=wallpaper&bdtype=0&oriquery=%E7%BB%BF%E8%89%B2%E5%A3%81%E7%BA%B8&objurl=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2F4%2F55753eac4f746.jpg&fromurl=ippr_z2C%24qAzdH3FAzdH3Fooo_z%26e3Botg9aaa_z%26e3Bv54AzdH3Fowssrwrj6_kt2_m9m8a_z%26e3Bip4s&gsm=&islist=&querylist="
+        },
+          type: 'Costar96'
         }, {
           date: '2019-10-17',
-          name: 'zhi',
-          address: 'Costar96'
+          project:{Id:"zhi","array":
+      ["http://p.qpic.cn/music_cover/8eiaDBJ27yYicpMibYZmmEdNEPOTSqwhACUXzSmicaorPE0grcic0ibrqA9A/600?n=1",
+      "http://p.qpic.cn/music_cover/drZnBOxDNzaK3s5ZzZNDxdZ4HdXiaRbCwTkJktgC0JRUwJA6JAJAZ6g/600?n=1",
+      "http://p.qpic.cn/music_cover/AhbCa0vazSRDjEJhYwthgjxuuCvKe2gibhbfdQrrrcLaOFjFFiceBNpw/600?n=1",
+      "http://p.qpic.cn/music_cover/0YKXV0pAP6fzSlwyxGcKKdYYDFZkhQSNM9KeEibFajvgp3tnlvdpAlg/600?n=1"]
+    },
+          type: 'Costar96'
         }, {
           date: '2019-10-17',
-          name: 'neng',
-          address: 'Costar96'
+          project:{Id:"neng",array:[
+      "http://p.qpic.cn/music_cover/8eiaDBJ27yYicpMibYZmmEdNEPOTSqwhACUXzSmicaorPE0grcic0ibrqA9A/600?n=1",
+      "http://p.qpic.cn/music_cover/drZnBOxDNzaK3s5ZzZNDxdZ4HdXiaRbCwTkJktgC0JRUwJA6JAJAZ6g/600?n=1",
+      "http://p.qpic.cn/music_cover/AhbCa0vazSRDjEJhYwthgjxuuCvKe2gibhbfdQrrrcLaOFjFFiceBNpw/600?n=1",
+      "http://p.qpic.cn/music_cover/0YKXV0pAP6fzSlwyxGcKKdYYDFZkhQSNM9KeEibFajvgp3tnlvdpAlg/600?n=1"
+    ]},
+          type: 'Costar96'
         }],
-        currentRow: null,
-        name:null
+        list:null
       }
     },
+    /* watch: {
+        change_data()
+    }, */
     methods: {
-      setCurrent(row) {
-        this.$refs.singleTable.setCurrentRow(row);
-      },
-      handleCurrentChange(val) {
-        this.currentRow = val;
-        this.name = val.name;
-        console.log(this.name)
-      }
+        obtain_data(val){
+            this.list = val;
+            console.log(val)
+        },
+        
     }
 }
 </script>
@@ -132,25 +162,35 @@ export default {
         width:100%;
         text-align: left;
     }
-    .tac{
-        width:30%;
-        display: flex;
+    /* 左边的项目目录位置 */
+    .main_aside_left{
+        width:27%;
         height:100%;
     }
-    .tac h5{
-        font-size: 1rem;
+    .main_aside_left table{
+        width:100%;
     }
-    .main_aside_left{
-        width:30%;
+    .main_aside_left th{
+        width:33%;
+        text-align: center;
+        font-size: 14px;
     }
+    .table_session{
+        font-weight: 700;
+        background: lightblue;
+    }
+    .main_aside_left td{
+        font-size: 12px;
+    }
+    /* 右边的主要的table部分 */
     .main_aside_right{
         overflow: hidden;
         width:100%;
         background: #ccc;
     }
-    el-menu{
+    /* el-menu{
         text-align: left;
-    }
+    } */
     .main_aside_right_top{
         display:flex;
         
@@ -198,8 +238,9 @@ export default {
         white-space: nowrap;/*不换行*/
         text-overflow:ellipsis;/*超出部分文字以...显示*/
     }
-    .main_aside_right_bottom{
+    .main_aside_right_table{
         height:100%;
+        /* background: lightblue; */
     }
     /* element中的css样式，未在本页面中显示 */
    .el-table__body{
