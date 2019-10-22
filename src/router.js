@@ -18,6 +18,11 @@ export default new Router({
           component: Detail
         }
       ]
+    },
+    {
+      path: "/",
+      redirect: "/home",
+      component: Home
     }
   ]
 });

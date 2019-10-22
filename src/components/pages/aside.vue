@@ -43,8 +43,7 @@
                 </el-table-column>
               </el-table> -->
         </div>
-        <div class = "main_aside_right">
-            
+        <div class = "main_aside_right">  
             <div class = "main_aside_right_top">
                 <ul>
                     <li>
@@ -89,23 +88,24 @@
                 </div>
             </div>
             <div class = "main_aside_right_table">
-                <Etable :list="list"/>
+                {{showmodal}}
+                <Etable :list="list"
+                v-on:change="change_father"/>
+                <Detail v-if="showModal" />   
             </div>
-        </div>
-        <router-view></router-view>
-             
-                   
+        </div>     
     </div>
 </template>
 
 <script>
     import Etable from '@/components/pages/table.vue';
     import Api from '@/common/api/api.js';
+    import Detail from '@/components/pages/details1.vue';
 
 export default {
     name:"main_aside",
     components: {
-        Etable,
+        Etable,Detail
     },
     data() {
       return {
@@ -140,18 +140,18 @@ export default {
     ]},
           type: 'Costar96'
         }],
-        list:null
+        list:null,
+        showmodal:false,
       }
     },
-    /* watch: {
-        change_data()
-    }, */
     methods: {
         obtain_data(val){
             this.list = val;
             console.log(val)
         },
-        
+        change_father(data){
+            this.showmodal = data;
+        },
     }
 }
 </script>

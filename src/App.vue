@@ -5,7 +5,8 @@
       <div id="nav">
         <router-link to="/home">96孔板</router-link>
       </div>
-      <router-view />
+      <Easide/>
+      <!-- <router-view /> -->
       <!-- <Home/> -->
     </div>
   </div>
@@ -13,12 +14,13 @@
 
 <script>
   import Eheader from "@/components/pages/header.vue";
+  import Easide from '@/components/pages/aside.vue';
   // import Home from "@/views/Home.vue";
 
   export default {
     name: "home",
     components: {
-      Eheader,
+      Eheader,Easide
     }
   };
 
