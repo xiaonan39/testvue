@@ -17,7 +17,7 @@
         
                 <div class="modal-footer">
                     <slot name="footer">
-                    <!-- default footer -->
+                    default footer
                     {{showmodal}}
                     <button class="modal-default-button" @click="detail">
                         OK
@@ -59,12 +59,13 @@
   display: table;
   transition: opacity .3s ease;
 }
-.modal-wrapper {
-  display: table-cell;
-  vertical-align: middle;
-}
+/*.modal-wrapper {
+   display: table-cell; 
+  vertical-align: middle;*/
+  /* 会使弹出框水平垂直居中，可以代替line-height 
+}*/
 .modal-container {
-  width: 300px;
+  width: 80%;
   margin: 0px auto;
   padding: 20px 30px;
   background-color: #fff;

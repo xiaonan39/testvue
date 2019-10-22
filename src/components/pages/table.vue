@@ -1,36 +1,37 @@
 <template>
     <div class = "e-table">
-    <table class = "">
-        <tr>
-            <th v-for="(th,index) in tdlist" :key="index">{{th}}</th>     
-        </tr>
-        <tr v-for="(tr,index) in trlist" :key="index">
-            <td v-for="(th,index) in tdlist" >
-                <span @click="change"> 
-                    <img :src ="list">
-                </span>
-            </td>
-        </tr>
-    </table>
-    
-</div>
-
+        <table class = "">
+            <tr>
+                <th v-for="(th,index) in tdlist" :key="index">{{th}}</th>     
+            </tr>
+            <tr v-for="(tr,index) in trlist" :key="index">
+                <td v-for="(th,index) in tdlist" >
+                    <span @click="change" > 
+                        <img :src ="list.list">
+                    </span>
+                </td>
+            </tr>
+        </table>   
+    </div>
 </template>
   
 <script>
-    import Details1 from '@/components/pages/details1.vue';
+    import Details from '@/components/pages/details.vue';
     export default{
         props:[
             'list','showmodal',
         ], 
         components: {
-            Details1
+            Details
         },
         data(){
             return{
                 tdlist:[1,2,3,4,5,6,7,8,9,10,11,12],
                 trlist:[1,2,3,4,5,6,7,8],
             }
+        },
+        watch: {
+            
         },
         methods:{
             change(){

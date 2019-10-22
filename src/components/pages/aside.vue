@@ -93,14 +93,14 @@
                 />  
             </div>
         </div>   
-        <Detail v-if="showmodal" @change_detail="change_fater" @close="showModal = false"/>  
+        <Detail v-if="showmodal" :showmodal="showmodal" @change_detail="change_fater"/>  
     </div>
 </template>
 
 <script>
     import Etable from '@/components/pages/table.vue';
     import Api from '@/common/api/api.js';
-    import Detail from '@/components/pages/details1.vue';
+    import Detail from '@/components/pages/details.vue';
 
 export default {
     name:"main_aside",
@@ -109,10 +109,11 @@ export default {
     },
     data() {
       return {
+        list:null,
+        showmodal:false,
         tableData: [{
           date: '2019-10-17',
-          project:{"Id":"sheng","list":"http://p.qpic.cn/music_cover/2BoMq9QFI0489p1qIiaDYek4UlGibZ8yztm3XH9LapLYHwWldaTOYt1g/600?n=1"
-      /* "https://image.baidu.com/search/detail?ct=503316480&z=0&ipn=false&word=%E7%BB%BF%E8%89%B2%E5%A3%81%E7%BA%B8&hs=2&pn=0&spn=0&di=97130&pi=0&rn=1&tn=baiduimagedetail&is=0%2C0&ie=utf-8&oe=utf-8&cl=2&lm=-1&cs=308272330%2C3429389941&os=450859311%2C3376180624&simid=0%2C0&adpicid=0&lpn=0&ln=30&fr=ala&fm=&sme=&cg=wallpaper&bdtype=0&oriquery=%E7%BB%BF%E8%89%B2%E5%A3%81%E7%BA%B8&objurl=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2F2017-12-14%2F5a31dc87dad0a.jpg&fromurl=ippr_z2C%24qAzdH3FAzdH3Fooo_z%26e3Botg9aaa_z%26e3Bv54AzdH3Fowssrwrj6_1jpwts_89a8ml_d_z%26e3Bip4s&gsm=&islist=&querylist=" */
+          project:{"Id":"sheng","list":{"list":"http://p.qpic.cn/music_cover/2BoMq9QFI0489p1qIiaDYek4UlGibZ8yztm3XH9LapLYHwWldaTOYt1g/600?n=1","tim":"img","bar":"one","sca":"two","Id":"ID","scan":"three","mic":"four","oper":"five"}
     },
           type: 'Costar96'
         }, {
@@ -139,10 +140,11 @@ export default {
       "http://p.qpic.cn/music_cover/0YKXV0pAP6fzSlwyxGcKKdYYDFZkhQSNM9KeEibFajvgp3tnlvdpAlg/600?n=1"
     ]},
           type: 'Costar96'
-        }],
-        list:null,
-        showmodal:false,
+        }],     
       }
+    },
+    created () {
+        this 
     },
     methods: {
         obtain_data(val){
@@ -218,8 +220,8 @@ export default {
         float:left;
     }
     .main_aside_right_top_img img{
-        min-width: 75px;
-        min-height: 100px;
+        width: 75px;
+        height: 100px;
         border: 1px solid #fff;
     }
     .main_aside_right_top_notes{
