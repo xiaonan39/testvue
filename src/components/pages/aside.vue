@@ -1,5 +1,5 @@
 <template>
-    <div class = "main_aside">
+    <div class = "main_aside" >
         <div class = "main_aside_left">
             <table>
                 <tr>
@@ -89,11 +89,11 @@
             </div>
             <div class = "main_aside_right_table">
                 {{showmodal}}
-                <Etable :list="list"
-                v-on:change="change_father"/>
-                <Detail v-if="showModal" />   
+                <Etable :list="list" :showmodal="showmodal" v-on:change_modal="change_fater"
+                />  
             </div>
-        </div>     
+        </div>   
+        <Detail v-if="showmodal" @change_detail="change_fater" @close="showModal = false"/>  
     </div>
 </template>
 
@@ -147,10 +147,11 @@ export default {
     methods: {
         obtain_data(val){
             this.list = val;
-            console.log(val)
+            console.log(this.list)
         },
-        change_father(data){
+        change_fater(data){
             this.showmodal = data;
+            console.log(this.showmodal)
         },
     }
 }

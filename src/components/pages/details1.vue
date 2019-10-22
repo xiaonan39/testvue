@@ -17,8 +17,9 @@
         
                 <div class="modal-footer">
                     <slot name="footer">
-                    default footer
-                    <button class="modal-default-button" @click="$emit('close')">
+                    <!-- default footer -->
+                    {{showmodal}}
+                    <button class="modal-default-button" @click="detail">
                         OK
                     </button>
                     </slot>
@@ -29,6 +30,21 @@
 </template>
 
 <script>
+    export default{
+        name:"modal-mask",
+        components: {
+        
+        },
+        props:[
+            'showmodal',
+        ],
+        methods: {
+            detail(){
+                this.$emit('change_detail',"false");
+                this.$el.style.display="none";
+            }
+        }
+    }
 </script>
 
 <style scoped>
