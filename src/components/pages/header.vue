@@ -1,32 +1,29 @@
 <template>
-    <div id = "e-header">
+    <div id = "el-header">
         <div class = "header_logo">
-            <p>生仝智能</p>
+            <img src = "@/assets/u89.png">
         </div>
     </div>
 </template>
 
-<script>
-    
+<script>  
     export default {
-        name:"header",
+        name:"el-header",
     }
 </script>
 
 <style scoped>
-    #e-header {
+    #el-header {
         width:100%;
-        height:40px;
+        height:50px;
     }
     .header_logo{
-        background: lightblue;
+        text-align: left;
+        background: #fff;
         height:100%;
         font-size: 20px;
     }
-    .header_logo p{
+    /* .header_logo img{
         height:100%;
-        text-align: left;
-        line-height: 40px;
-        padding-left: 15px;
-    }
+    } */
 </style>

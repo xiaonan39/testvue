@@ -5,9 +5,9 @@
                 <th v-for="(th,index) in tdlist" :key="index">{{th}}</th>     
             </tr>
             <tr v-for="(tr,index) in trlist" :key="index">
-                <td v-for="(th,index) in tdlist" >
-                    <span @click="change" > 
-                        <img :src ="list.list">
+                <td v-for="(th,index) in list?list:tdlist" >
+                    <span @click="change" @mouseenter="hover(list)"> 
+                        <img :src ="th">
                     </span>
                 </td>
             </tr>
@@ -37,6 +37,10 @@
             change(){
                 this.$emit('change_modal',"true")
             },
+            hover(val){
+                console.log(val)
+                this.$emit('td_hover',val)
+            }
         },
     }
 </script>

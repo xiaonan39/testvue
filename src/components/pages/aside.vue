@@ -1,237 +1,337 @@
 <template>
-    <div class = "main_aside" >
-        <div class = "main_aside_left">
-            <table>
-                <tr>
-                    <th>Data</th>
-                    <th>Progect ID</th>
-                    <th>Type</th>
-                </tr>
-                <tr class = "table_session">
-                    <td colspan="3">
-                        <li>2019/10/21
-                            <b>3</b>
-                            <span>session</span>
+    <div class = "el-aside" >
+        <div class = "aside_coat">
+            <div class = "el-aside_twonav">
+                <div class = "el-aside_twonav_select">
+                    <div class = "el-aside_twonav_select_scan">
+                        <span>Scan profile</span>
+                        <!-- <el-select class = "folder" @change="floder_click"  placeholder="请选择">
+                            <el-option
+                                v-for="(item,floder_index) in floder"
+                                :key="floder_index"
+                                :value="floder_index">
+                                {{item}}{{floder_index}}
+                            </el-option>
+                        </el-select> -->
+                        <select class = "floder" @change="floder_click"> 
+                            <option v-for="(item,floder_index) in floder" :key="floder_index" :value ="floder_index" >{{item}}--{{floder_index}}</option>
+                        </select>
+                    </div>
+                    <div class = "el-aside_twonav_select_date">
+                        <span>Date</span>
+                        <!-- <el-select class = "file" 
+                        @change="file_click"
+                        filterable placeholder="请选择">
+                            <el-option
+                                v-for="(item,file_index) in file"
+                                :key="file_index"
+                                :value="file_index">
+                            </el-option>
+                            {{item}}
+                        </el-select> -->
+                        <select class = "file" @change="file_click">
+                            <option :value = "file_index" v-for="(item,file_index) in file" :key="file_index">{{item}}--{{file_index}}</option>
+                       </select>
+                    </div>
+                </div>
+                <div class = "el_aside_twonav_table">
+                    <table v-for="(item,index) in select['table']" :key="index+100">
+                        <tr>
+                            <th v-for="(item1,key,th_index) in item['th']" :key="th_index">{{item1}}</th>
+                        </tr>
+                        <tr v-for="(item2,key,td_index) in item['td']" :key="td_index">
+                            <td >{{item2.date}}</td>
+                            <td @click="obtain_data(list)">{{item2.Id}}</td>
+                            <td>{{item2.type}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class = "el-aside_right">  
+                <div class = "el-aside_right_top">
+                    <ul>
+                        <li>
+                            <div class = "el-aside_right_top_img">
+                                <b>Timepoints:</b>
+                                <img src = "" >
+                            </div>
                         </li>
-                    </td>
-                </tr>
-                <tr v-for="item in tableData">
-                    <td>{{item.date}}</td>
-                    <td @click="obtain_data(item.project.list)">{{item.project.Id}}</td>
-                    <td>{{item.type}}</td>
-                </tr>
-            </table>
-                <!-- <el-table
-                ref="singleTable"
-                :data="tableData"
-                highlight-current-row
-                @current-change="handleCurrentChange"
-                style="width: 100%">
-                <el-table-column
-                  property="date"
-                  label="date"
-                  width="40%">
-                </el-table-column>
-                <el-table-column
-                  property="name"
-                  label="project ID"
-                  width="30%">
-                </el-table-column>
-                <el-table-column
-                  property="address"
-                  label="type">
-                </el-table-column>
-              </el-table> -->
+                        <li>
+                            <b>Barcode:</b>
+                            <span>{{son_hover_data}}</span>                            
+                        </li>
+                        <li>
+                            <b>Scanned:</b>
+                            <span></span>
+                        </li>
+                        <li>
+                            <b>ID:</b>
+                            <span></span>
+                        </li>
+                        <li>
+                            <b>Scan profile:</b>
+                            <span></span>
+                        </li>
+                        <li>
+                            <b>Microplate:</b>
+                            <span></span>
+                        </li>
+                        <li>
+                            <b>Operator:</b>
+                            <span></span>
+                        </li>
+                    </ul>
+                    <div class = "el-aside_right_top_notes" >
+                        <b>Notes:</b>
+                        <img style="width:100px;height:100px;float:right;" src = "" >
+                    </div>
+                    <div class = "el-aside_right_top_buttons">
+                        <button> Open Full Results</button>
+                        <button> Save Report…</button>
+                        <button> Export clone list…</button>
+                    </div>
+                </div>
+                <div class = "el-aside_right_table">
+                    {{showmodal}}
+                    <Etable :list="letter" :showmodal="showmodal" @change_modal="change_aside" @td_hover="aside_hover"
+                    />  
+                </div>
+            </div>   
+            <Detail v-show="showmodal" :showmodal="showmodal" @change_detail="change_aside"/>  
         </div>
-        <div class = "main_aside_right">  
-            <div class = "main_aside_right_top">
-                <ul>
-                    <li>
-                        <div class = "main_aside_right_top_img">
-                            <b>Timepoints:</b>
-                            <img src = "" >
-                        </div>
-                    </li>
-                    <li>
-                        <b>Barcode:</b>
-                        <span></span>                            
-                    </li>
-                    <li>
-                        <b>Scanned:</b>
-                        <span></span>
-                    </li>
-                    <li>
-                        <b>ID:</b>
-                        <span></span>
-                    </li>
-                    <li>
-                        <b>Scan profile:</b>
-                        <span></span>
-                    </li>
-                    <li>
-                        <b>Microplate:</b>
-                        <span></span>
-                    </li>
-                    <li>
-                        <b>Operator:</b>
-                        <span></span>
-                    </li>
-                </ul>
-                <div class = "main_aside_right_top_notes" >
-                    <b>Notes:</b>
-                    <img style="width:100px;height:100px;float:right;" src = "" >
-                </div>
-                <div class = "main_aside_right_top_buttons">
-                    <button> Open Full Results</button>
-                    <button> Save Report…</button>
-                    <button> Export clone list…</button>
-                </div>
-            </div>
-            <div class = "main_aside_right_table">
-                {{showmodal}}
-                <Etable :list="list" :showmodal="showmodal" v-on:change_modal="change_fater"
-                />  
-            </div>
-        </div>   
-        <Detail v-if="showmodal" :showmodal="showmodal" @change_detail="change_fater"/>  
     </div>
 </template>
 
 <script>
     import Etable from '@/components/pages/table.vue';
     import Api from '@/common/api/api.js';
+    import jsondata from '@/common/api/data2.js';
     import Detail from '@/components/pages/details.vue';
 
 export default {
-    name:"main_aside",
+    name:"el-aside",
     components: {
         Etable,Detail
     },
     data() {
       return {
-        list:null,
-        showmodal:false,
-        tableData: [{
-          date: '2019-10-17',
-          project:{"Id":"sheng","list":{"list":"http://p.qpic.cn/music_cover/2BoMq9QFI0489p1qIiaDYek4UlGibZ8yztm3XH9LapLYHwWldaTOYt1g/600?n=1","tim":"img","bar":"one","sca":"two","Id":"ID","scan":"three","mic":"four","oper":"five"}
-    },
-          type: 'Costar96'
-        }, {
-          date: '2019-10-17',
-          project: {"Id":"tong",
-            "array":"https://image.baidu.com/search/detail?ct=503316480&z=0&ipn=false&word=%E7%BB%BF%E8%89%B2%E5%A3%81%E7%BA%B8&hs=2&pn=1&spn=0&di=99440&pi=0&rn=1&tn=baiduimagedetail&is=0%2C0&ie=utf-8&oe=utf-8&cl=2&lm=-1&cs=2477295793%2C3932990727&os=2275448177%2C4154071541&simid=4129018881%2C650689467&adpicid=0&lpn=0&ln=30&fr=ala&fm=&sme=&cg=wallpaper&bdtype=0&oriquery=%E7%BB%BF%E8%89%B2%E5%A3%81%E7%BA%B8&objurl=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2F4%2F55753eac4f746.jpg&fromurl=ippr_z2C%24qAzdH3FAzdH3Fooo_z%26e3Botg9aaa_z%26e3Bv54AzdH3Fowssrwrj6_kt2_m9m8a_z%26e3Bip4s&gsm=&islist=&querylist="
-        },
-          type: 'Costar96'
-        }, {
-          date: '2019-10-17',
-          project:{Id:"zhi","array":
-      ["http://p.qpic.cn/music_cover/8eiaDBJ27yYicpMibYZmmEdNEPOTSqwhACUXzSmicaorPE0grcic0ibrqA9A/600?n=1",
-      "http://p.qpic.cn/music_cover/drZnBOxDNzaK3s5ZzZNDxdZ4HdXiaRbCwTkJktgC0JRUwJA6JAJAZ6g/600?n=1",
-      "http://p.qpic.cn/music_cover/AhbCa0vazSRDjEJhYwthgjxuuCvKe2gibhbfdQrrrcLaOFjFFiceBNpw/600?n=1",
-      "http://p.qpic.cn/music_cover/0YKXV0pAP6fzSlwyxGcKKdYYDFZkhQSNM9KeEibFajvgp3tnlvdpAlg/600?n=1"]
-    },
-          type: 'Costar96'
-        }, {
-          date: '2019-10-17',
-          project:{Id:"neng",array:[
-      "http://p.qpic.cn/music_cover/8eiaDBJ27yYicpMibYZmmEdNEPOTSqwhACUXzSmicaorPE0grcic0ibrqA9A/600?n=1",
-      "http://p.qpic.cn/music_cover/drZnBOxDNzaK3s5ZzZNDxdZ4HdXiaRbCwTkJktgC0JRUwJA6JAJAZ6g/600?n=1",
-      "http://p.qpic.cn/music_cover/AhbCa0vazSRDjEJhYwthgjxuuCvKe2gibhbfdQrrrcLaOFjFFiceBNpw/600?n=1",
-      "http://p.qpic.cn/music_cover/0YKXV0pAP6fzSlwyxGcKKdYYDFZkhQSNM9KeEibFajvgp3tnlvdpAlg/600?n=1"
-    ]},
-          type: 'Costar96'
-        }],     
+        list:null,   //总的数据
+        letter:null,   //传递给详情table的变量
+        showmodal:false,   //控制modal显示的开关
+        son_hover_data:null,
+        floder:null,    //存放类似文件夹的数据；
+        floder_value:null,  //文件夹传递给文件的变量
+        file:null,        //存放类似文件的数据；
+        file_value:null,   //文件传递给table的变量
+        select:{
+            "table": [
+            {
+                "th":["date","Id","type"],
+                "td":[
+                {"date":"2019-10-28","Id":"123","type":"96孔板"},
+                {"date":"2019-10-28","Id":"1234","type":"96孔板"},
+                {"date":"2019-10-28","Id":"12345","type":"96孔板"}
+                ]
+            },
+            {
+                "th":["date","Id","type"],
+                "td":[
+                {"date":"2019-10-29","Id":"111","type":"96孔板"},
+                {"date":"2019-10-29","Id":"1222","type":"96孔板"},
+                {"date":"2019-10-29","Id":"1333","type":"96孔板"}
+                ]
+            },
+            {
+                "th":["date","Id","type"],
+                "td":[
+                {"date":"2019-10-30","Id":"2111","type":"96孔板"},
+                {"date":"2019-10-30","Id":"2222","type":"96孔板"},{"date":"2019-10-30","Id":"12345","type":"96孔板"}
+                ]
+            },
+            {
+                "th":["date","Id","type"],
+                "td":[
+                {"date":"2019-10-31","Id":"32333","type":"96孔板"},
+                {"date":"2019-10-31","Id":"3222","type":"96孔板"},
+                {"date":"2019-10-31","Id":"34444","type":"96孔板"}
+                ]
+            },
+            ]
+        }, 
       }
     },
     created () {
-        this 
+        this.initdata();
     },
     methods: {
-        obtain_data(val){
-            this.list = val;
-            console.log(this.list)
+        initdata(){
+            console.log("ahadf");
+            /* 在public目录中添加了data.js作为假数据，记得删除 */
+            /* this.$axios.get('').then((data)=>{
+                this.list = jsondata.data.list;
+                console.log(this.list)
+            }) */ 
+            setTimeout(()=>{
+                this.list = jsondata;
+                console.log(this.list);
+                this.renderfloder();
+            },500)
         },
-        change_fater(data){
-            this.showmodal = data;
+        /* 传递给子页面table的变量 */
+        obtain_data(val){
+            this.letter = val;
+            var arr = Object.keys(this.letter);
+
+            console.log(arr);
+        },
+        /* 打开modal页面的开关 */
+        change_aside(data){
+            this.showmodal = !this.showmodal;
             console.log(this.showmodal)
+        },
+        /* 划过图片时显示的简略信息 */
+        aside_hover(data){
+            this.son_hover_data = data?data['100000']['110000']:"";
+            console.log(this.son_hover_data);
+        },
+        /* 选择框的渲染 */
+        renderfloder(){
+            this.floder=this.list["100000"];
+            console.log(this.list['110100'])
+            this.renderfile(110100) 
+        },
+        floder_click(eve){
+            this.floder_value =eve.target.value;
+            this.renderfile(this.floder_value) ;
+        },
+        renderfile(value){
+            this.file = this.list[value];
+            console.log(this.file);
+        },
+        file_click(eve){
+            this.file_value = eve.target.value;
+            console.log(this.file_value);
         },
     }
 }
 </script>
 
 <style>
-    .main_aside{
+    .el-aside{
+        overflow: hidden;
+        background: #f2f0f5;
+        width:90%;
+    }
+    .aside_coat{
+        margin:10px 0 0 10px;
         display: flex;
-        width:100%;
         text-align: left;
     }
-    /* 左边的项目目录位置 */
-    .main_aside_left{
-        width:27%;
+    /* ------------------------左边的项目目录位置 */
+    .el-aside_twonav{
+        flex-direction: column;
+        background: #fff;
+        display: flex;
+        overflow: auto;
+        width:25%;
         height:100%;
     }
-    .main_aside_left table{
+    /* ------------------------>选择框 */
+    .el-aside_twonav_select{
+        margin: 10px 0 0 10px;
+        display: flex;
+        flex-direction: column;
+    }
+    .el-aside_twonav_select_scan{
+        margin-bottom: 5px;
+    }
+    .el-aside_twonav_select span{
+        float: left;
+        width:35%;
+        font-size: 14px;
+    }
+    .el-scrollbar{
+        background: #fff;
+    }
+    select{
+        display: inline-block;
+        width:60%;
+    }
+    select input{
         width:100%;
     }
-    .main_aside_left th{
+    /* -------------------->选择框的下拉框 */
+    .el-aside_twonav_select .el-select-dropdown{
+        border:1px solid #ccc;
+    }
+    /* -------------------------------------->项目列表表格 */
+    .el_aside_twonav_table{
+        overflow:auto;
+    }
+    .el_aside_twonav_table table{
+        margin-top:10px;
+        width:98%;
+        overflow:auto;
+        border-collapse: collapse;
+    }
+    .el_aside_twonav_table th{
+        background: #0096fa;
         width:33%;
         text-align: center;
         font-size: 14px;
     }
-    .table_session{
+    .el-aside_twonav_table_session{
         font-weight: 700;
         background: lightblue;
     }
-    .main_aside_left td{
+    .el-aside_twonav td{
+        width:33%;
+        text-align: center;
         font-size: 12px;
+        border:1px solid #ccc;
     }
-    /* 右边的主要的table部分 */
-    .main_aside_right{
-        overflow: hidden;
-        width:100%;
+    /* ------------------->右边的主要的table部分 */
+    .el-aside_right{
+        width:74%;
         background: #ccc;
     }
-    /* el-menu{
-        text-align: left;
-    } */
-    .main_aside_right_top{
+    .el-aside_right_top{
         display:flex;
-        
-
     }
-    .main_aside_right_top ul{
+    .el-aside_right_top ul{
         float:left;
     }
-    .main_aside_right_top ul li{
+    .el-aside_right_top ul li{
         width:30%;
         float:left;
         margin-right: 5px;
+        display: flex;
     }
-    .main_aside_right_top ul li b{
+    .el-aside_right_top ul li b{
         margin-bottom: 15px;
         display: inline-block;
     }
-    .main_aside_right_top_img{
+    .el-aside_right_top_img{
         display: inline-block;
         width:100%;
         height:100%;
     }   
-    .main_aside_right_top_img b{
+    .el-aside_right_top_img b{
         float:left;
     }
-    .main_aside_right_top_img img{
+    .el-aside_right_top_img img{
         width: 75px;
         height: 100px;
         border: 1px solid #fff;
     }
-    .main_aside_right_top_notes{
+    .el-aside_right_top_notes{
         display:flex;
     }
-    .main_aside_right_top_buttons{
+    .el-aside_right_top_buttons{
         width:10%;
         height:5%;
     }
-    .main_aside_right_top_buttons button{
+    .el-aside_right_top_buttons button{
         width:100%;
         background: #fff;
         margin-bottom: 5px;
@@ -241,9 +341,8 @@ export default {
         white-space: nowrap;/*不换行*/
         text-overflow:ellipsis;/*超出部分文字以...显示*/
     }
-    .main_aside_right_table{
-        height:100%;
-        /* background: lightblue; */
+    .el-aside_right_table{
+        overflow: auto;
     }
     /* element中的css样式，未在本页面中显示 */
    .el-table__body{

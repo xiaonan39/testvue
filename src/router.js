@@ -3,6 +3,8 @@ import Router from "vue-router";
 // import Home from "./views/Home.vue";
 import Home from "./components/pages/aside.vue";
 import Detail from "./components/pages/details.vue";
+import Scan from "@/views/scan.vue";
+import Report from "@/views/report.vue";
 
 Vue.use(Router);
 
@@ -19,6 +21,12 @@ export default new Router({
         }
       ]
     },
+    {
+      path: "/scan",
+      name: "scan",
+      component: Scan
+    },
+    { path: "/report", name: "report", component: Report },
     {
       path: "/",
       redirect: "/home",

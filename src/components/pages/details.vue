@@ -20,7 +20,7 @@
                     default footer
                     {{showmodal}}
                     <button class="modal-default-button" @click="detail">
-                        OK
+                        关闭
                     </button>
                     </slot>
                 </div>
@@ -59,13 +59,17 @@
   display: table;
   transition: opacity .3s ease;
 }
-/*.modal-wrapper {
-   display: table-cell; 
+.modal-wrapper {
+   /*display: table-cell; 
   vertical-align: middle;*/
-  /* 会使弹出框水平垂直居中，可以代替line-height 
-}*/
+  /* 会使弹出框水平垂直居中，可以代替line-height */
+    width:100%;
+    height:100%;
+}
 .modal-container {
+  overflow: auto;
   width: 80%;
+  height:100%;
   margin: 0px auto;
   padding: 20px 30px;
   background-color: #fff;
