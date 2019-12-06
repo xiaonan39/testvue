@@ -115,7 +115,6 @@ export default {
     },
     data() {
       return {
-<<<<<<< HEAD
         list:null,   //总的数据
         letter:null,   //传递给详情table的变量
         showmodal:false,   //控制modal显示的开关
@@ -213,55 +212,6 @@ export default {
             this.file_value = eve.target.value;
             console.log(this.file_value);
         },
-=======
-        tableData: [{
-          date: '2019-10-17',
-          name: 'shengtong',
-          address: 'Coming Costar96'
-        }, {
-          date: '2019-10-18',
-          name: 'shengtong',
-          address: 'Coming Costar96'
-        }, {
-          date: '2019-10-197',
-          name: 'shengtong',
-          address: 'Coming Costar96'
-        }, {
-          date: '2019-10-117',
-          name: 'shengtong',
-          address: 'Coming Costar96'
-        }],
-        currentRow: null
-      }
-    },
-    mounted() {
-        
-    },
-    watch: {
-        data(){
-          this.getData()  
-        }
-    },
-    methods: {
-      setCurrent(row) {
-        this.$refs.singleTable.setCurrentRow(row);
-      },
-      getData(){
-          let api = ''
-          let model ={
-              data: '',
-              name:""
-          }
-      },
-      handleCurrentChange(val) {
-        this.currentRow = val;
-        console.log(val)
-        this.data = val.data
-      },
-      getName(val){
-
-      }
->>>>>>> master
     }
 }
 </script>
@@ -302,7 +252,6 @@ export default {
         width:35%;
         font-size: 14px;
     }
-<<<<<<< HEAD
     .el-scrollbar{
         background: #fff;
     }
@@ -311,11 +260,6 @@ export default {
         width:60%;
     }
     select input{
-=======
-    .main_aside_right{
-        display: flex;
-    flex-direction: column;
->>>>>>> master
         width:100%;
     }
     /* -------------------->选择框的下拉框 */
