@@ -19,8 +19,11 @@
     import Details from '@/components/pages/details.vue';
     export default{
         props:[
-            'list','showmodal',
-        ], 
+            'list',
+            'showmodal',
+            'image',   //测试cytomine的v-bind
+            'id',       //测试cytomine的v-bind
+        ],
         components: {
             Details
         },
@@ -38,10 +41,12 @@
                 this.$emit('change_modal',"true")
             },
             hover(val){
-                console.log(val)
                 this.$emit('td_hover',val)
             }
         },
+        created(){
+            console.log(this.viewer+this.image+"----"+this.id)  //测试cytomine的v-bind
+        }
     }
 </script>
 

@@ -3,18 +3,19 @@
             <div class = "scan_video">
                 <div class = "scan_video_preview">
                     <b>Preview</b>
-                    <div class = "scan_video_preview_img" ref = "video">
+                    <video class = "scan_video_preview_img" ref = "video" autoplay>
     
-                    </div>
+                    </video>
                 </div>
                 <div class = "scan_video_message">
                     <b>Picture Message</b>
-                    <div class = "scan_video_message_infor">
+                    <canvas class = "scan_video_message_infor">
                         信息
-                    </div>
+                    </canvas>
                     <div class = "scan_video_message_btn">
                         <button class = "start" @click="startvideo">start</button>
-                        <button class = "end">end</button>
+                        <button class = "screenshot" @click="reCamera">screenshot</button>
+                        <button class = "end" @click="closeCamera">end</button>
                     </div>
                 </div>
             </div>
@@ -29,42 +30,44 @@
                 }
             },
             methods: {
-                startvideo(){   
-                    let video = this.$refs.video//获取要放视频的video标签节点
-                if (navigator.mediaDevices.getUserMedia === undefined) { //判断当前设备是否有摄像设备
-                    navigator.mediaDevices.getUserMedia = function (constraints) {
-                    // 首先获取现存的getUserMedia(如果存在)
-                    var getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.getUserMedia
-                    // 有些浏览器不支持，会返回错误信息
-                    // 保持接口一致
-                    if (!getUserMedia) {
-                        return Promise.reject(new Error('getUserMedia is not implemented in this browser'))
+                startvideo(){
+                    navigator.getMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMeddia || navigator.msGetUserMedia;
+                    let that=this;
+                    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                    navigator.mediaDevices.getUserMedia({
+                        video: true,
+                        audio: true
+                    }).then(function(stream) {
+                        that.stream=stream;
+                        that.cameraState=true;
+                        that.stream = typeof stream.stop === 'function' ? stream : stream.getTracks()[1];
+                        var video=$("video")[0];
+                        var canvas=$("canvas")[0];
+                        video.srcObject  = stream;
+                        canvas.srcObject  = stream;
+                        // canvas.play();
+                        video.play();
+                        }).catch(function(err) {
+                            console.log(err);
+                        })
                     }
-                    // 否则，使用Promise将调用包装到旧的navigator.getUserMedia
-                    return new Promise(function (resolve, reject) {
-                        getUserMedia.call(navigator, constraints, resolve, reject)
-                    })
+                    },
+                    //关闭摄像头
+                    closeCamera(){
+                        this.cameraState=false;
+                        this.stream && this.stream.stop();
+                    },
+                    
+                    //点击拍摄或集鸽拍摄
+                    reCamera(foot_ring_sn){
+                        var smallCanvas=$("canvas")[0];
+                        var smallContext=smallCanvas.getContext("2d");
+                        let smallVideo=$("video")[0];
+                        smallContext.drawImage(smallVideo, 0, 0, 270, 200);
+                        //拍好的图片显示
+                        smallCanvas.toDataURL('image/png').split(",")[1]
                     }
-                }
-                var constraints = { audio: false, video:true }
-                navigator.mediaDevices.getUserMedia(constraints).then(function (stream) {
-                    console.log(stream)
-                    // 旧的浏览器可能没有srcObject
-                   /*  if ('srcObject' in video) {
-                        video.srcObject = stream
-                    } else {
-                    // 避免在新的浏览器中使用它，因为它正在被弃用。
-                        video.src = window.URL.createObjectURL(stream)
-                    } */
-                    video.onloadedmetadata = function (e) {
-                        console.log("dakasgsfdgsfdi")
-                        video.play() //打开摄像头
-                        console.log("dakai")
-                    }
-                }).catch(err => {
-                    console.log("报错123",err)
-                })
-                }
+                
             }
         }
     </script>
@@ -83,6 +86,7 @@
         .scan_video b{
             height:50px;
             line-height: 50px;
+            text-align: center;
         }
         .scan_video_preview{
             width:50%;
@@ -107,7 +111,7 @@
         .scan_video_message_btn{
             margin-top :10px;
         }
-        .end{
-            margin-left:15px;
+        .screenshot{
+            margin:0 15px;
         }
     </style> 

@@ -94,7 +94,9 @@
                 <div class = "el-aside_right_table">
                     {{showmodal}}
                     <Etable :list="letter" :showmodal="showmodal" @change_modal="change_aside" @td_hover="aside_hover"
+                    v-bind='viewer'  
                     />  
+                    <!-- 测试cytomine的v-bind -->
                 </div>
             </div>   
             <Detail v-show="showmodal" :showmodal="showmodal" @change_detail="change_aside"/>  
@@ -115,6 +117,7 @@ export default {
     },
     data() {
       return {
+        viewer:{'id':'123','image':'cheng','note':"注释"},
         list:null,   //总的数据
         letter:null,   //传递给详情table的变量
         showmodal:false,   //控制modal显示的开关
@@ -165,7 +168,6 @@ export default {
     },
     methods: {
         initdata(){
-            console.log("ahadf");
             /* 在public目录中添加了data.js作为假数据，记得删除 */
             /* this.$axios.get('').then((data)=>{
                 this.list = jsondata.data.list;
@@ -187,12 +189,10 @@ export default {
         /* 打开modal页面的开关 */
         change_aside(data){
             this.showmodal = !this.showmodal;
-            console.log(this.showmodal)
         },
         /* 划过图片时显示的简略信息 */
         aside_hover(data){
             this.son_hover_data = data?data['100000']['110000']:"";
-            console.log(this.son_hover_data);
         },
         /* 选择框的渲染 */
         renderfloder(){

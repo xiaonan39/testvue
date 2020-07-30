@@ -43,7 +43,7 @@
                 this.$emit('change_detail',"false");
                 this.$el.style.display="none";
             }
-        }
+        },
     }
 </script>
 
