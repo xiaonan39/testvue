@@ -18,7 +18,7 @@
             </template> -->
 
             <template #footer>
-                故事都是骗人的1112222
+                故事都是骗人的11122233333
             </template>
         </solt-child>
     </div>
