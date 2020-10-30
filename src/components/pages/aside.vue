@@ -175,7 +175,7 @@ export default {
             }) */ 
             setTimeout(()=>{
                 this.list = jsondata;
-                console.log(this.list);
+                // console.log(this.list);
                 this.renderfloder();
             },500)
         },
@@ -197,7 +197,7 @@ export default {
         /* 选择框的渲染 */
         renderfloder(){
             this.floder=this.list["100000"];
-            console.log(this.list['110100'])
+            // console.log(this.list['110100'])
             this.renderfile(110100) 
         },
         floder_click(eve){
@@ -206,7 +206,7 @@ export default {
         },
         renderfile(value){
             this.file = this.list[value];
-            console.log(this.file);
+            // console.log(this.file);
         },
         file_click(eve){
             this.file_value = eve.target.value;

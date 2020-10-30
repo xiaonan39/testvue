@@ -5,6 +5,7 @@ import Home from "./components/pages/aside.vue";
 import Detail from "./components/pages/details.vue";
 import Scan from "@/views/scan.vue";
 import Report from "@/views/report.vue";
+import Solt from "@/views/Solt.vue";
 
 Vue.use(Router);
 
@@ -27,6 +28,7 @@ export default new Router({
       component: Scan
     },
     { path: "/report", name: "report", component: Report },
+    { path: "/solt", name: "solt", component: Solt },
     {
       path: "/",
       redirect: "/home",

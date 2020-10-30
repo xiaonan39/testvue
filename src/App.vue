@@ -7,6 +7,7 @@
             <router-link to="/home">Dashboard</router-link>
             <router-link to="/scan">Scan</router-link>
             <router-link to="/report">Report</router-link>
+            <router-link to="/solt">Solt</router-link>
         </div>
       </div>
       <router-view />
@@ -20,12 +21,13 @@
   import Easide from '@/components/pages/aside.vue';
   import Scan from '@/views/scan.vue';
   import Report from '@/views/report.vue';
+  import Solt from '@/views/Solt.vue';
   // import Home from "@/views/Home.vue";
 
   export default {
     name: "home",
     components: {
-      Eheader,Easide,Scan,Report
+      Eheader,Easide,Scan,Report,Solt
     }
   };
 

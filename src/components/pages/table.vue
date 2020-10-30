@@ -45,7 +45,7 @@
             }
         },
         created(){
-            console.log(this.viewer+this.image+"----"+this.id)  //测试cytomine的v-bind
+            // console.log(this.viewer+this.image+"----"+this.id)  //测试cytomine的v-bind
         }
     }
 </script>
